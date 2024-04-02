@@ -7,19 +7,21 @@ const images = [
   { url: "https://picsum.photos/id/238/200/300" },
   { url: "https://picsum.photos/id/239/200/300" },
 ];
-   btn.addEventListener('click',function()){
-	   let p1 = downloadImg(images[0].url);
-	   let p2= downloadImg(images[1].url);
-	   let p3 = downloadImg(images[2].url);
-	   let promiseArr = Promise.all([p1,p2,p3]);
-	   promiseArr.then((img)=>{
-		   for(let i=0;i<img.length;i++){
-			   output.appendChild(img[i]);
-		   }
-	   }).catch((arr)=>{
-		   console.log(arr);
-	   });
-	   function downloadImage(url){
+  btn.addEventListener("click",function(){
+	let p1 = downloadImage(images[0].url);
+let p2 = downloadImage(images[1].url);
+let p3 = downloadImage(images[2].url);
+
+let promiseArray = Promise.all([p1,p2,p3]);
+
+promiseArray.then((img)=>{
+	for(let i=0;i<img.length;i++){
+		output.appendChild(img[i]);
+	}
+}).catch((err)=>{console.log(err)});
+})
+
+function downloadImage(url){
 	let img = new Image();
 	return new Promise((resolve,reject)=>{
 		img.onload=function(){
@@ -30,5 +32,4 @@ const images = [
 		}
 	img.src = url;
 	})
-
-   }
+}
